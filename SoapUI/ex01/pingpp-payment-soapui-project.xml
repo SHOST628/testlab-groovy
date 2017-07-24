@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2a5c82ba-2078-41d2-84d8-dfeb52787e07" activeEnvironment="Default" name="pingpp-payment" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="CreateOrders"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="PTSOrders"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:RestService" id="a4435018-4981-4eac-97ea-1b00e4e04b8e" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://api.pingxx.com" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://api.pingxx.com</con:endpoint></con:endpoints><con:resource name="orders" path="/v1/orders" id="b3c084e4-9623-4c76-b80d-929aa24d816e"><con:settings/><con:parameters/><con:method name="Method 1" id="5804a8ea-e310-4928-9939-2f8a88deeba2" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>400 401</con:status><con:params/><con:element xmlns:ord="https://api.pingxx.com/v1/orders">ord:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ord="https://api.pingxx.com/v1/orders">ord:Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>applcation/json; charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ord="https://api.pingxx.com/v1/orders">ord:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>applcation/json; charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ord="https://api.pingxx.com/v1/orders">ord:Fault</con:element></con:representation><con:request name="Request 1" id="39f83dcd-4836-474c-908b-8a3b40c333fe" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer " xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>https://api.pingxx.com</con:endpoint><con:request>{"body": "test1body1", "client_ip": "127.0.0.1", "uid": "pingxxx_sales03", "app": "app_", "description": "test1-description", "merchant_order_no": "YMLTOhHLVx", "currency": "cny", "amount": 200,"subject": " 测试订单 2017-07-24-01-05 Ni "}</con:request><con:originalUri>https://api.pingxx.com/v1/orders</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="135fc01d-9341-467f-aa5e-f3b3814495c5" name="CreateOrders"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a414c252-af65-4770-acac-952b1bf659da" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="PTSOrders" searchProperties="true"><con:settings/><con:testStep type="groovy" name="signInHeader" id="444a2c26-989f-414f-891e-1cfe968446ef"><con:settings/><con:config><script>import com.eviware.soapui.support.types.StringToStringMap 
+import groovy.json.JsonSlurper
+import org.apache.commons.codec.binary.Base64;
+import sun.security.util.DerInputStream;
+import sun.security.util.DerValue;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateCrtKeySpec;
+
+//获得项目文件所在目录的路径，私钥文件与项目文件在同一目录下
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String projectDir = groovyUtils.projectPath
+def privateKeyPath = "${projectDir}/privatekey.key"
+//log.info(privateKeyPath)
+
+//=============测试步骤的配置＝＝＝＝＝＝＝＝＝＝＝＝＝
+def serviceName = "request"
+def charset = "UTF-8"
+def tr = testRunner.testCase.getTestStepByName(serviceName)
+def props = testRunner.testCase.getTestStepByName( "Properties" )
+def livekey = props.getPropertyValue("live_key");
+
+def headers = new StringToStringMap()
+headers.put("Authorization","Bearer "+livekey)
+
+String url = "/v1/orders"
+//=============测试步骤的配置＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+def method = tr.getRestMethod().getMethod().toString()
+def slurper = new JsonSlurper()
+def request = context.expand('${request#Request}')
+
+FileInputStream inputStream = new FileInputStream(privateKeyPath);
+byte[] keyBytes = new byte[inputStream.available()];
+inputStream.read(keyBytes);
+inputStream.close();
+String PEMEncodedPrivateKey = new String(keyBytes, charset);
+
+String timeStamp = System.currentTimeMillis()/1000L + "";
+String data
+
+// 去掉时间戳的秒
+if(method == "GET"){
+
+	data =   url + timeStamp[0..9]
+	}else if(request.length().toInteger()>0)
+{
+data =  request + url + timeStamp[0..9]
+}
+
+//log.info data
+
+// 加密，签名字段
+PEMEncodedPrivateKey = PEMEncodedPrivateKey.replaceAll("(-+BEGIN (RSA )?PRIVATE KEY-+\\r?\\n|-+END (RSA )?PRIVATE KEY-+\\r?\\n?)", "");
+byte[] privateKeyBytes = PEMEncodedPrivateKey.decodeBase64();
+PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+KeyFactory kf = KeyFactory.getInstance("RSA");
+PrivateKey privateKey = kf.generatePrivate(keySpec);
+
+Signature signature = Signature.getInstance("SHA256withRSA");
+signature.initSign(privateKey);
+signature.update(data.getBytes(charset));
+byte[] signBytes = signature.sign();
+sign = signBytes.encodeBase64().toString().replaceAll("\n|\r", "");
+//log.info sign
+headers.put("Pingplusplus-Signature",sign)
+headers.put("Pingplusplus-Request-Timestamp",timeStamp[0..9])
+
+testRunner.testCase.getTestStepByName(serviceName).testRequest.setRequestHeaders(headers)</script></con:config></con:testStep><con:testStep type="groovy" name="DataGen" id="3a7a86dd-5bb1-4057-892f-23e76434fa38"><con:settings/><con:config><script>import org.apache.commons.lang.RandomStringUtils;
+java.util.Date today = new java.util.Date();
+java.text.SimpleDateFormat sdf= new java.text.SimpleDateFormat("yyyy-MM-dd-hh-mm");
+String date = sdf.format(today)
+String randomString = (RandomStringUtils.random(2, true, false));
+String todayStr = String.format(" 测试订单 $date $randomString ")
+//log.info todayStr
+String order_no = (RandomStringUtils.random(10, true, false));
+
+def props = testRunner.testCase.getTestStepByName( "Properties" )
+props.setPropertyValue("order_no",order_no)
+props.setPropertyValue("subject",todayStr)</script></con:config></con:testStep><con:testStep type="properties" name="Properties" id="a84f1ece-6e75-40fc-87ac-1e17e2c152bc"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>live_key</con:name><con:value/></con:property><con:property><con:name>app1_id</con:name><con:value/></con:property><con:property><con:name>app1_subapp1_id</con:name><con:value/></con:property><con:property><con:name>order_no</con:name><con:value>YMLTOhHLVx</con:value></con:property><con:property><con:name>subject</con:name><con:value> 测试订单 2017-07-24-01-05 Ni </con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="request" id="e404ea77-72c5-4793-a389-4fbd9273606e"><con:settings/><con:config service="https://api.pingxx.com" resourcePath="/v1/orders" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="request" id="39f83dcd-4836-474c-908b-8a3b40c333fe" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint xsi:nil="true"/><con:request>{"body": "test1body1", "client_ip": "127.0.0.1", "uid": "pingxxx_sales03", "app": "${Properties#app1_id}", "description": "test1-description", "merchant_order_no": "${Properties#order_no}", "currency": "cny", "amount": 200,"subject": "${Properties#subject}"}</con:request><con:originalUri>https://api.pingxx.com/v1/orders</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="96d7c166-3a71-47fd-b8b6-920f5f32d43d" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>order_no</con:name><con:value>cKvFtXAbSG</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
